@@ -32,11 +32,11 @@ public:
 
 int main() {
     int num;
-    std::cin >> num;
+    std::cin >> num;\
 
     Solution s;
     int result = s.mySqrt(num);
-    std::cout << result << std::endl;
+    cout << result << std::endl;
 
     return 0;
 }
