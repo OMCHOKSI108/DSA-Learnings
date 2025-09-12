@@ -1,0 +1,143 @@
+/*180. Consecutive Numbers
+Medium
+Topics
+premium lock icon
+Companies
+SQL Schema
+Pandas Schema
+Table: Logs
+
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| id          | int     |
+| num         | varchar |
++-------------+---------+
+In SQL, id is the primary key for this table.
+id is an autoincrement column starting from 1.
+ 
+
+Find all numbers that appear at least three times consecutively.
+
+Return the result table in any order.
+
+The result format is in the following example.
+
+ 
+
+Example 1:
+
+Input: 
+Logs table:
++----+-----+
+| id | num |
++----+-----+
+| 1  | 1   |
+| 2  | 1   |
+| 3  | 1   |
+| 4  | 2   |
+| 5  | 1   |
+| 6  | 2   |
+| 7  | 2   |
++----+-----+
+Output: 
++-----------------+
+| ConsecutiveNums |
++-----------------+
+| 1               |
++-----------------+
+Explanation: 1 is the only number that appears consecutively for at least three times.*/
+
+SELECT l1.num as Consecutive 
+FROM Logs l1 
+JOIN Logs l2 on l1.id=l2.id AND l1.num=l2.num
+JOIN Logs l3 on l2.id=l3.id AND l2.num=l3.num
+
+
+---------------------------
+
+I'll explain the SQL code for finding consecutive numbers, point out the current issue, and provide the corrected version.
+
+## Current Code Analysis
+
+```sql
+SELECT l1.num as Consecutive 
+FROM Logs l1 
+JOIN Logs l2 on l1.id=l2.id AND l1.num=l2.num
+JOIN Logs l3 on l2.id=l3.id AND l2.num=l3.num
+```
+
+**What it's trying to do:**
+- Use three table aliases (l1, l2, l3) to represent three consecutive rows
+- Join them to find numbers that appear three times consecutively
+
+**The Problem:**
+The JOIN conditions are incorrect:
+- `l1.id=l2.id` means same row (id=id)
+- `l2.id=l3.id` means same row (id=id)
+- This will only match each row with itself three times, not consecutive rows
+
+## Corrected Version
+
+```sql
+SELECT DISTINCT l1.num as ConsecutiveNums
+FROM Logs l1 
+JOIN Logs l2 ON l1.id = l2.id - 1 AND l1.num = l2.num
+JOIN Logs l3 ON l2.id = l3.id - 1 AND l2.num = l3.num
+```
+
+**How the corrected version works:**
+
+1. **l1**: First row in the sequence
+2. **l2**: Second row (id = l1.id + 1) with same number
+3. **l3**: Third row (id = l2.id + 1) with same number
+
+**Step-by-step with the example:**
+```
+Logs table:
+| id | num |
+|----|-----|
+| 1  | 1   |
+| 2  | 1   |
+| 3  | 1   |
+| 4  | 2   |
+| 5  | 1   |
+| 6  | 2   |
+| 7  | 2   |
+```
+
+**Matching process:**
+- l1=(1,1), l2=(2,1), l3=(3,1) ✓ (consecutive ids: 1,2,3 with same num=1)
+- l1=(2,1), l2=(3,1), l3=(4,2) ✗ (nums don't match: 1,1,2)
+- l1=(4,2), l2=(5,1), l3=(6,2) ✗ (nums don't match: 2,1,2)
+- And so on...
+
+Only the first match succeeds, returning `num = 1`.
+
+## Alternative Approaches
+
+**Using Window Functions (more modern):**
+```sql
+SELECT DISTINCT num as ConsecutiveNums
+FROM (
+    SELECT num, 
+           ROW_NUMBER() OVER (ORDER BY id) - ROW_NUMBER() OVER (PARTITION BY num ORDER BY id) as grp
+    FROM Logs
+) t
+GROUP BY num, grp
+HAVING COUNT(*) >= 3
+```
+
+**Using LAG/LEAD functions:**
+```sql
+SELECT DISTINCT num as ConsecutiveNums
+FROM (
+    SELECT num,
+           LAG(num, 1) OVER (ORDER BY id) as prev_num,
+           LAG(num, 2) OVER (ORDER BY id) as prev_num2
+    FROM Logs
+) t
+WHERE num = prev_num AND num = prev_num2
+```
+
+The corrected JOIN approach is the most straightforward for this specific problem.
