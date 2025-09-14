@@ -51,3 +51,10 @@ code:
 
 # Write your MySQL query statement below
 SELECT email as Email FROM Person GROUP BY email HAVING COUNT(email) > 1;
+
+--------------------------------------------------------------------------------
+-- Explanation of the code:
+-- 1. `SELECT email as Email`: Selects the `email` column and renames it to `Email` for the final output, as requested.
+-- 2. `FROM Person`: Specifies that the query should run on the `Person` table.
+-- 3. `GROUP BY email`: This is the key part of the solution. It gathers all identical email addresses into groups. For the example, it creates one group for 'a@b.com' (containing two entries) and another for 'c@d.com' (with one entry).
+-- 4. `HAVING COUNT(email) > 1`: After grouping, this clause filters out groups that have only one entry. It keeps only the groups with a count greater than 1, which are the duplicate emails.
