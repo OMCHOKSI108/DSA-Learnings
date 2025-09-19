@@ -74,7 +74,7 @@ public:
 
                 if(carry == 0) res = "0" + res;
                 
-                else res = "1" + res;
+                else    res = "1" + res;
                     
                 carry = 1;
              }
