@@ -53,4 +53,4 @@ int main() {
     cout << "\nLongest Common Prefix: '" << result << "'" << endl;
     
     return 0;
-}
+}x

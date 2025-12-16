@@ -74,3 +74,172 @@ int main(){
     cout<<"Longest Substring Length : "<<s1.LongestSubstringLength(s);
     return 0;
 }
+
+
+/*Explanantion :
+
+---
+
+## What the function is solving
+
+Given a string `s`, find the **length of the longest contiguous substring** that has **no repeated characters**.
+
+Example:
+
+```
+s = "abcabcbb"
+Answer = 3   // "abc"
+```
+
+---
+
+## High-level idea (Sliding Window)
+
+We maintain a **window** `[left … r]` such that:
+
+* The window always contains **unique characters**
+* `r` expands the window to the right
+* `left` shrinks the window when a duplicate appears
+
+The window moves forward in **O(n)** time.
+
+---
+
+## Code walkthrough
+
+### 1. Variables
+
+```cpp
+int left = 0;
+int maxLength = 0;
+unordered_set<char> charSet;
+```
+
+* `left` → start index of the sliding window
+* `maxLength` → stores the best answer so far
+* `charSet` → keeps track of characters **currently inside the window**
+
+---
+
+### 2. Right pointer loop
+
+```cpp
+for (int r = 0; r < s.length(); r++) {
+```
+
+* `r` is the **right pointer**
+* It expands the window one character at a time
+
+---
+
+### 3. Handle duplicates
+
+```cpp
+while (charSet.find(s[r]) != charSet.end()) {
+    charSet.erase(s[left]);
+    left++;
+}
+```
+
+**What this means:**
+
+* If `s[r]` is already inside the window:
+
+  * We have a **duplicate**
+* So we **shrink the window from the left** until the duplicate is removed
+
+This guarantees:
+
+> The window always contains unique characters
+
+Example:
+
+```
+s = "abba"
+window before conflict: "ab"
+r points to second 'b'
+```
+
+We remove:
+
+```
+remove 'a' → window "b"
+remove 'b' → window ""
+```
+
+Now we can safely add the new `'b'`.
+
+---
+
+### 4. Add current character
+
+```cpp
+charSet.insert(s[r]);
+```
+
+* Adds the new character to the window
+* Window now has **all unique characters**
+
+---
+
+### 5. Update max length
+
+```cpp
+maxLength = max(maxLength, r - left + 1);
+```
+
+* Current window length = `r - left + 1`
+* Compare it with previous best
+* Store the maximum
+
+---
+
+### 6. Return result
+
+```cpp
+return maxLength;
+```
+
+---
+
+## Step-by-step example
+
+### Input:
+
+```
+s = "abcabcbb"
+```
+
+| r | s[r] | Window | maxLength |
+| - | ---- | ------ | --------- |
+| 0 | a    | "a"    | 1         |
+| 1 | b    | "ab"   | 2         |
+| 2 | c    | "abc"  | 3         |
+| 3 | a    | "bca"  | 3         |
+| 4 | b    | "cab"  | 3         |
+| 5 | c    | "abc"  | 3         |
+| 6 | b    | "cb"   | 3         |
+| 7 | b    | "b"    | 3         |
+
+Final answer = **3**
+
+---
+
+## Why this solution is efficient
+
+* Each character is **inserted and removed at most once**
+* Time Complexity: **O(n)**
+* Space Complexity: **O(min(n, charset))**
+
+---
+
+## Key intuition
+
+* Use **two pointers** to represent a valid substring
+* Use a **set** to enforce uniqueness
+* Expand when valid, shrink when invalid
+
+---
+
+
+*/
