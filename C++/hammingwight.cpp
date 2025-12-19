@@ -11,7 +11,7 @@ public:
 };
 int main() {
     Solution solution;
-    int result = solution.hammingWeight(11);
+    int result = solution.hammingWeight(16);
     std::cout << "Hamming Weight: " << result << std::endl;
     return 0;
 }
