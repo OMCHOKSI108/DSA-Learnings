@@ -1,0 +1,48 @@
+SELECT 
+    c.customer_name,
+    CAST(SUM(i.total_price) AS DECIMAL(10, 6)) AS amount_spent
+FROM customer c
+JOIN invoice i 
+ON c.id = i.customer_id
+GROUP BY c.customer_name
+HAVING SUM(i.total_price) <= 0.25 * (
+    SELECT AVG(total_price) FROM invoice
+)
+ORDER BY amount_spent DESC;
+
+
+/------/
+
+-- EXPLANATION:
+-- This query retrieves customers who have spent significantly below average amounts.
+-- It calculates total spending per customer and filters those spending <= 25% of average invoice price.
+
+SELECT 
+    c.customer_name,
+    -- Retrieves the customer's name from the customer table
+    
+    CAST(SUM(i.total_price) AS DECIMAL(10, 6)) AS amount_spent
+    -- Sums all invoice totals for each customer and converts to DECIMAL(10,6) format
+    -- This ensures consistent decimal precision (10 digits total, 6 after decimal point)
+
+FROM customer c
+-- Selects from the customer table (aliased as 'c')
+
+JOIN invoice i 
+-- Joins with invoice table (aliased as 'i') to link customers to their invoices
+ON c.id = i.customer_id
+-- Connection condition: matches customer ID with the customer_id in invoices
+
+GROUP BY c.customer_name
+-- Groups results by customer name so SUM aggregates all invoices per customer
+
+HAVING SUM(i.total_price) <= 0.25 * (
+    -- Filters groups to only customers whose total spending is <= 25% of average
+    SELECT AVG(total_price) FROM invoice
+    -- Subquery calculates the average invoice total across all invoices
+)
+
+ORDER BY amount_spent DESC;
+-- Sorts results by amount spent in descending order (highest spenders first)
+
+/------/
