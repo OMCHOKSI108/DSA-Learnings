@@ -1,0 +1,5 @@
+SELECT p.product_name,sum(o.unit)
+FROM Proucts p JOIN
+Orders o ON 
+p.product_id = o.product_id
+WHERE o.order_date is like "2020-02-%" GROUP BY p.product_id HAVING sum(o.unit) >=100
