@@ -240,7 +240,7 @@ Make sure the code is correct and runnable."""
                 'Content-Type': 'application/json'
             },
             json={
-                'model': 'llama3-8b-8192',
+                'model': 'mixtral-8x7b-32768',
                 'messages': [{'role': 'user', 'content': prompt}],
                 'max_tokens': 1000,
                 'temperature': 0.7
