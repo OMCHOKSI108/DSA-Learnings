@@ -49,7 +49,7 @@ public class ArrayMax {
         for (int num : arr) {
             if (num > max) max = num;
         }
-        
+
         return max;
     }
 
@@ -271,6 +271,10 @@ def main():
     
     # Create directory
     os.makedirs(folder, exist_ok=True)
+    
+    # Add .gitkeep to make directory committable
+    with open(f'{folder}/.gitkeep', 'w') as f:
+        f.write('')
     
     # Configure git
     subprocess.run(['git', 'config', 'user.name', 'github-actions[bot]'], check=True)
