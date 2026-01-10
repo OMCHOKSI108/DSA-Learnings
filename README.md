@@ -8,3 +8,7 @@ This repository contains various coding solutions and learning resources for Dat
 - **codechef/**, **greeksforgreeks/**, **hackerrank/**: Placeholders for solutions from these platforms.
 
 Feel free to explore the folders for code samples and learning materials.
+
+## 2026-01-10
+- Generated 3 DSA problems: recursion, strings, stack
+- Added random codes in C++, Python, Java
