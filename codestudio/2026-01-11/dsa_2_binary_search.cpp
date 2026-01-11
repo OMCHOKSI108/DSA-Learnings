@@ -1,0 +1,1 @@
+// Default cpp code for binary search
