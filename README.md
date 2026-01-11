@@ -12,3 +12,7 @@ Feel free to explore the folders for code samples and learning materials.
 ## 2026-01-10
 - Generated 3 DSA problems: recursion, strings, stack
 - Added random codes in C++, Python, Java
+
+## 2026-01-11
+- Generated 3 DSA problems: queue, binary search, trees
+- Added random codes in C++, Python, Java
