@@ -25,3 +25,7 @@ Feel free to explore the folders for code samples and learning materials.
 - queue_py_2026-01-12.py
 - stack_cpp_2026-01-12.cpp
 - binary_search_cpp_2026-01-12.cpp
+## 2026-01-12
+- stack_cpp_2026-01-12.cpp
+- arrays_java_2026-01-12.java
+- dp_cpp_2026-01-12.cpp
