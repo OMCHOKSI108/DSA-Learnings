@@ -41,3 +41,7 @@ Feel free to explore the folders for code samples and learning materials.
 - arrays_py_2026-01-13.py
 - queue_java_2026-01-13.java
 - binary_search_py_2026-01-13.py
+## 2026-01-13
+- arrays_java_2026-01-13.java
+- strings_py_2026-01-13.py
+- dp_cpp_2026-01-13.cpp
