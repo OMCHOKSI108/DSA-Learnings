@@ -15,6 +15,7 @@ jobs:
         with:
           token: ${{ secrets.TOKEN }}
           fetch-depth: 0
+          persist-credentials: false  # Don't let checkout override git credentials
 
       - name: Setup Python
         uses: actions/setup-python@v4
@@ -44,7 +45,9 @@ jobs:
           GIT_COMMITTER_EMAIL: 165450225+OMCHOKSI108@users.noreply.github.com
         run: |
           git add .
-          git commit -m "Daily DSA solutions $(date -u +'%Y-%m-%d')" || echo "No changes to commit"
+          git diff --staged --quiet || git commit -m "Daily DSA solutions $(date -u +'%Y-%m-%d')"
 
       - name: Push changes
-        run: git push
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.TOKEN }}@github.com/${{ github.repository }}.git
+          git push
