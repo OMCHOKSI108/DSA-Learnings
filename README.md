@@ -37,3 +37,7 @@ Feel free to explore the folders for code samples and learning materials.
 - strings_java_2026-01-13.java
 - recursion_py_2026-01-13.py
 - arrays_java_2026-01-13.java
+## 2026-01-13
+- arrays_py_2026-01-13.py
+- queue_java_2026-01-13.java
+- binary_search_py_2026-01-13.py
