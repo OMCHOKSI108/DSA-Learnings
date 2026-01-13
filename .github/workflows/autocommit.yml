@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository using PAT TOKEN
+      - name: Checkout repository using PAT
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.TOKEN }}
@@ -29,15 +29,22 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
 
-      - name: Configure git identity (commit as OMCHOKSI108)
+      # 🔑 Force BOTH author and committer
+      - name: Configure git identity
         run: |
           git config user.name "OMCHOKSI108"
           git config user.email "165450225+OMCHOKSI108@users.noreply.github.com"
+          git config commit.gpgsign false
 
-      - name: Commit changes
+      - name: Commit changes as OMCHOKSI108
+        env:
+          GIT_AUTHOR_NAME: OMCHOKSI108
+          GIT_AUTHOR_EMAIL: 165450225+OMCHOKSI108@users.noreply.github.com
+          GIT_COMMITTER_NAME: OMCHOKSI108
+          GIT_COMMITTER_EMAIL: 165450225+OMCHOKSI108@users.noreply.github.com
         run: |
           git add .
           git commit -m "Daily DSA solutions $(date -u +'%Y-%m-%d')" || echo "No changes to commit"
 
-      - name: Push changes using PAT
+      - name: Push changes
         run: git push
