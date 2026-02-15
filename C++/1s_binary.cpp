@@ -8,6 +8,8 @@ public:
         return arr;
     }
 
+
+//binary to decimal and decimal to binary 
 private:
     int decTobin(int n){
         int one_bin=0;
