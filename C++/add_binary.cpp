@@ -37,12 +37,6 @@ class Solution{
 
             }
         }
-
-
-        
-
-
-
         
         return binary;
     }
