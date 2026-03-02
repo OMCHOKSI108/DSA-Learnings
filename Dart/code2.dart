@@ -1,4 +1,4 @@
-import 'dart:io';
+﻿import 'dart:io';
 
 void main() {
   //String user input
@@ -36,7 +36,7 @@ void main() {
 
 
 
-  //  String str = "Sanskruti";
+  //  String str = "pentagon";
   //  print(str.codeUnits);   //Example of code units
   //  print(str.isEmpty);     //Example of isEmpty
   //  print(str.isNotEmpty);  //Example of isNotEmpty
@@ -58,7 +58,7 @@ void main() {
 
 
 
-  //  String address1 = "Sanskruti"; // Here F is capital
+  //  String address1 = "pentagon"; // Here F is capital
   //  String address2 = "Star"; // Here T and A are capital
   //  print("Address 1 in uppercase: ${address1.toUpperCase()}"); 
   //  print("Address 1 in lowercase: ${address1.toLowerCase()}"); 

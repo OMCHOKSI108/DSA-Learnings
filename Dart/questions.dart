@@ -1,15 +1,15 @@
-// Dart Practice Questions Solutions
+﻿// Dart Practice Questions Solutions
 import 'dart:io';
 
 void main() {
   // 1. Program to print name
   print('\n1. Printing name:');
-  print('Sanskruti');
+  print('pentagon');
 
   // 2. Print name with single and double quotes
   print('\n2. Printing with quotes:');
-  print('Hello I am "Sanskruti"');
-  print("Hello I'am \"Sanskruti\"");
+  print('Hello I am "pentagon"');
+  print("Hello I'am \"pentagon\"");
 
   // 3. Declare constant type of int
   print('\n3. Constant integer:');
